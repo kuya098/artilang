@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title>登録</title>
+</head>
+<body>
+    <a>登録する単語</a>
+    <input type="text" id="word"/>
+    <br>
+    <a>品詞</a>
+    <select id="part">
+        <option value="noun">名詞</option>
+        <option value="verb">動詞</option>
+    </select>
+    <br>
+    <a>説明</a>
+    <br>
+    <textarea id="explain"></textarea>
+    <br>
+    <button id="registration">登録する</button>
+    <br>
+    <a href="main.html">戻る</a>
+
+
+    <script>
+        //import data from "data.json" assert{type:"json"}
+        //console.log(data)
+        //let data_arr = JSON.parse(data)
+        //console.log(data_arr)
+        const fs = require("fs")
+        const path = require("path")
+        const json_file_path = path.join(__dirname,"data.json")
+        console.log(`JSONファイルのパス:${json_file_path}`)
+
+        const word = document.getElementById("word")
+        const part = document.getElementById("part")
+        const explain = document.getElementById("explain")
+        const button = document.getElementById("registration")
+        let info = {word:"",part:"",explain:""}
+
+        button.addEventListener("click",wordregi)
+
+        function wordregi(){
+            info = {
+                word : word.value,
+                part : part.value,
+                explain : explain.value
+            }
+            console.log(info)
+
+            //data_arr.push(info)
+
+        }
+    </script>
+</body>
