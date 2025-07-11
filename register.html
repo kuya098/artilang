@@ -8,10 +8,7 @@
     <input type="text" id="word"/>
     <br>
     <a>品詞</a>
-    <select id="part">
-        <option value="noun">名詞</option>
-        <option value="verb">動詞</option>
-    </select>
+    <input type="text" id="part"/>
     <br>
     <a>説明</a>
     <br>
@@ -22,34 +19,40 @@
     <a href="main.html">戻る</a>
 
 
-    <script>
-        //import data from "data.json" assert{type:"json"}
-        //console.log(data)
-        //let data_arr = JSON.parse(data)
-        //console.log(data_arr)
-        const fs = require("fs")
-        const path = require("path")
-        const json_file_path = path.join(__dirname,"data.json")
-        console.log(`JSONファイルのパス:${json_file_path}`)
+    <script type="module">
+        import { createClient } from "https://esm.sh/v86/@supabase/supabase-js";
+        const supabaseUrl = "https://nhyitronsrjltnuskjuz.supabase.co"
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oeWl0cm9uc3JqbHRudXNranV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5Njc3NzYsImV4cCI6MjA2NzU0Mzc3Nn0.NI2uCDwnyH9t2Xidi6aYd0mgsu7ZPA1aHzyyiQ-eZSw';
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
         const word = document.getElementById("word")
         const part = document.getElementById("part")
         const explain = document.getElementById("explain")
         const button = document.getElementById("registration")
-        let info = {word:"",part:"",explain:""}
+        let info = {word:"a",part:"b",explain:"c"}
 
         button.addEventListener("click",wordregi)
 
-        function wordregi(){
+        async function wordregi(){
             info = {
                 word : word.value,
                 part : part.value,
                 explain : explain.value
             }
-            console.log(info)
 
-            //data_arr.push(info)
-
+            const { data, error } = await supabase
+                .from('MyLang')
+                .insert([
+                    info
+                ])
+                .select()
+            if (error) {
+                console.error("Error inserting data:", error);
+            } else {
+                console.log("Data inserted successfully:", data);
+            }
         }
+
+        
     </script>
 </body>
