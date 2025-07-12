@@ -2,9 +2,24 @@
 <head>
     <meta charset="utf-8" />
     <title>登録</title>
+    <style>
+        @font-face {
+            font-family: 'MyFont';
+            src: url('anl-0.0.2.ttf') format('truetype');
+            unicode-range: U+E000-FFFF; /* Private Use Area */
+        }
+        body {
+            font-family: 'MyFont';
+            font-size: 20px;
+        }
+        input, textarea {
+            font-family: 'MyFont';
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
-    <a>登録する単語</a>
+    <a>登録する単語</a>
     <input type="text" id="word"/>
     <br>
     <a>品詞</a>
